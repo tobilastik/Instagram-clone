@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Icon from '@expo/vector-icons/Ionicons';
-import Welcome from './screens/Welcome';
+import Welcome from './src/screens/Welcome';
 import {
   createSwitchNavigator,
   createAppContainer,
@@ -8,14 +8,15 @@ import {
   createDrawerNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import Signup from './screens/Signup';
-import Login from './screens/Login';
-import Forgetpassword from './screens/Forgetpassword';
-import Home from './screens/HomeScreen';
-import Notifications from './screens/Notifications';
-import Portal from './screens/JobPortal';
-import Search from './screens/SearchScreen';
-import Messages from './screens/MessageScreen';
+import Signup from './src/screens/Signup';
+import Login from './src/screens/Login';
+import Forgetpassword from './src/screens/Forgetpassword';
+import Home from './src/screens/HomeScreen';
+import Notifications from './src/screens/Notifications';
+import Portal from './src/screens/JobPortal';
+import Search from './src/screens/SearchScreen';
+import Messages from './src/screens/MessageScreen';
+import ClapButton from './src/components/ClapButton';
 
 export default class App extends Component {
   render () {
@@ -43,6 +44,7 @@ const AppTabNavigator = createBottomTabNavigator (
 const AppStackNavigator = createStackNavigator (
   {
     AppTabNavigator: AppTabNavigator,
+    ClapButton: ClapButton,
   },
   {
     defaultNavigationOptions: ({navigation}) => {

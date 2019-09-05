@@ -14,4 +14,5 @@ export default {
   navyblue: '#4d61bb',
   white: '#fff',
   green: '#26d06f',
+  red: 'red',
 };
