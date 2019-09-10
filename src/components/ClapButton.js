@@ -9,39 +9,65 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import color from '../constants/Colors';
+import ClapBubble from './ClapBubble';
 
 export default class ClapButton extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      yPosition: new Animated.Value (0),
-      opacity: new Animated.Value (0),
+      claps: [],
+      count: 0,
     };
   }
-  componentDidMount () {
-    Animated.parallel ([
-      Animated.timing (this.state.yPosition, {
-        toValue: -150,
-        duration: 500,
-      }),
-      Animated.timing (this.state.opacity, {
-        toValue: 1,
-        duration: 500,
-      }),
-    ]).start ();
+
+  onClap = () => {
+    let count = this.state.count;
+    let claps = this.state.claps;
+    count++;
+    claps.push (count);
+    this.setState ({count});
+    console.log (claps);
+  };
+
+  animationComplete (countNum) {
+    claps = this.state.claps;
+    claps.splice (claps.indexOf (countNum), 1);
+    this.setState ({claps});
+  }
+
+  renderClaps () {
+    return this.state.claps.map (countNum => (
+      <ClapBubble
+        key={countNum}
+        count={countNum}
+        animationComplete={this.animationComplete.bind (this)}
+      />
+    ));
+  }
+
+  keepClapping = () => {
+    this.keepClap = setInterval (() => {
+      this.onClap ();
+    }, 150);
+  };
+
+  stopClapping () {
+    if (this.keepClap) {
+      clearInterval (this.keepClap);
+    }
   }
 
   render () {
-    let animationStyle = {
-      transform: [{translateY: this.state.yPosition}],
-      opacity: this.state.opacity,
-    };
     return (
       <View style={{flex: 1}}>
-        <Animated.View style={[animationStyle, styles.clapBubble]}>
-          <Text style={styles.clapText}>+1</Text>
-        </Animated.View>
-        <TouchableOpacity style={styles.clapbutton}>
+        {this.renderClaps ()}
+        <TouchableOpacity
+          onPress={() => this.onClap ()}
+          onPressIn={() => this.keepClapping ()}
+          onPressOut={() => this.stopClapping ()}
+          activeOpacity={0.6}
+          style={styles.clapbutton}
+        >
           <Image
             style={styles.clap}
             source={require ('../assets/images/clap.png')}

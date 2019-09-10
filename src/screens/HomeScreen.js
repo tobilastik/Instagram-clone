@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import color from '../constants/Colors';
 import {Ionicons} from '@expo/vector-icons';
+import ClapButton from '../components/ClapButton';
 
 const height = Dimensions.get ('window').height;
 
@@ -49,6 +50,9 @@ export default class HomeScreen extends Component {
               style={styles.uploadPicture}
             />
           </TouchableHighlight>
+          <View>
+            <ClapButton />
+          </View>
         </View>
       </ScrollView>
     );
