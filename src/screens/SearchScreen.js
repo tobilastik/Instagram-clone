@@ -11,11 +11,10 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-//import Icon from 'react-native-vector-icons/Ionicons';
 import Category from '../components/Category';
-import Home from '../components/Home';
 const {height, width} = Dimensions.get ('window');
 import {Header, Item, Icon, Input} from 'native-base';
+import Suggestions from '../components/Suggestions';
 
 class SearchScreen extends Component {
   componentWillMount () {
@@ -124,23 +123,22 @@ class SearchScreen extends Component {
                   justifyContent: 'space-between',
                 }}
               >
-                <Home
-                  width={width}
-                  name="Oppo Renoz"
-                  type="Cain Yew"
-                  rating={4}
-                />
-                <Home
+                <Suggestions width={width} name="Oppo Renoz" type="Cain Yew" />
+                <Suggestions
                   width={width}
                   name="Velvet Winter"
                   type="Joel Manah"
-                  rating={5}
                 />
-                <Home
+                <Suggestions
                   width={width}
                   name="Tokyo Part One"
                   type="Mike Grabiel"
-                  rating={2}
+                />
+
+                <Suggestions
+                  width={width}
+                  name="Tokyo Part One"
+                  type="Mike Grabiel"
                 />
 
               </View>

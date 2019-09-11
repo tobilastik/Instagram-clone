@@ -5,14 +5,25 @@ import {
   ScrollView,
   Image,
   StyleSheet,
+  TouchableOpacity,
   TouchableHighlight,
   Dimensions,
+  FlatList,
 } from 'react-native';
 import color from '../constants/Colors';
-import {Ionicons} from '@expo/vector-icons';
+import {
+  Ionicons,
+  FontAwesome,
+  Entypo,
+  Foundation,
+  AntDesign,
+} from '@expo/vector-icons';
 import ClapButton from '../components/ClapButton';
+import home from '../api/home.json';
+import HomeDetails from '../components/HomeDetails';
 
 const height = Dimensions.get ('window').height;
+const width = Dimensions.get ('window').width;
 
 export default class HomeScreen extends Component {
   constructor (props) {
@@ -23,37 +34,14 @@ export default class HomeScreen extends Component {
   render () {
     return (
       <ScrollView style={styles.container}>
-        <View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Image
-              source={require ('../assets/images/yoga.jpg')}
-              style={styles.profilePicture}
-            />
-            <Text style={styles.textStyle}>Vladmir Putin</Text>
-            <TouchableHighlight
-              underlayColor="transparent"
-              onPress={() => this.props.navigation.navigate ('ClapButton')}
-              style={{position: 'absolute', right: 5}}
-            >
-              <Ionicons name="ios-more" size={20} />
-            </TouchableHighlight>
-          </View>
-
-          <TouchableHighlight>
-            <Image
-              source={require ('../assets/images/yoga.jpg')}
-              style={styles.uploadPicture}
-            />
-          </TouchableHighlight>
-          <View>
-            <ClapButton />
-          </View>
-        </View>
+        <FlatList
+          data={home.items}
+          renderItem={home => <HomeDetails home={home.item} />}
+          keyExtractor={home => home.id}
+          ItemSeparatorComponent={() => (
+            <View style={{height: 0.5, backgroundColor: '#E5E5E5'}} />
+          )}
+        />
       </ScrollView>
     );
   }
@@ -82,5 +70,18 @@ const styles = StyleSheet.create ({
   textStyle: {
     fontSize: 18,
     fontWeight: '400',
+    color: 'gray',
+  },
+  iconStyle: {
+    color: 'gray',
+  },
+  shareIcon: {
+    position: 'absolute',
+    left: width - 220,
+    color: 'gray',
+  },
+  iconText: {
+    marginLeft: 6,
+    color: 'gray',
   },
 });

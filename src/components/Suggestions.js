@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 
 import StarRating from 'react-native-star-rating';
 
-class Home extends Component {
+class Suggestions extends Component {
   render () {
     return (
       <View
@@ -35,18 +35,13 @@ class Home extends Component {
             {this.props.name}
           </Text>
           {/* <Text style={{fontSize: 10}}>{this.props.price}$</Text> */}
-          <StarRating
-            disable={true}
-            maxStars={5}
-            rating={this.props.rating}
-            starSize={10}
-          />
+
         </View>
       </View>
     );
   }
 }
-export default Home;
+export default Suggestions;
 
 const styles = StyleSheet.create ({
   container: {
