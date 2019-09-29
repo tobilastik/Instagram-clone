@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  ScrollView,
+  Button,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -17,18 +17,29 @@ import {
   Entypo,
   Foundation,
   AntDesign,
+  Feather,
+  MaterialCommunityIcons,
 } from '@expo/vector-icons';
+import Constants from 'expo-constants';
+import * as Sharing from 'expo-sharing';
+import {FileSystem} from 'expo';
 import ClapButton from '../components/ClapButton';
 
 const height = Dimensions.get ('window').height;
 const width = Dimensions.get ('window').width;
 
+//const image_source = require('../assets/images/yoga.jpg')
+
 export default class HomeDetails extends Component {
   constructor (props) {
     super (props);
-    this.state = {};
+    this.state = {
+      bookmarkIcon: true,
+    };
   }
-
+  bookmarkImage = () => {
+    this.setState ({bookmarkIcon: !this.state.bookmarkIcon});
+  };
   render () {
     let home = this.props.home;
     return (
@@ -113,14 +124,24 @@ export default class HomeDetails extends Component {
 
             </TouchableOpacity>
 
-            <TouchableOpacity>
-              <Entypo
-                name="share-alternative"
-                size={20}
-                style={styles.shareIcon}
-              />
-            </TouchableOpacity>
+            <TouchableHighlight
+              underlayColor="transparent"
+              onPress={() => this.bookmarkImage ()}
+            >
+              {this.state.bookmarkIcon
+                ? <MaterialCommunityIcons
+                    name="bookmark-outline"
+                    size={30}
+                    style={styles.shareIcon}
+                  />
+                : <MaterialCommunityIcons
+                    name="bookmark"
+                    size={30}
+                    //style={styles.shareIcon}
+                  />}
+            </TouchableHighlight>
           </View>
+
           <TouchableHighlight onPress={() => alert ('to comments page')}>
             <View style={{flex: 1, flexDirection: 'row', marginLeft: 10}}>
 
@@ -185,10 +206,10 @@ const styles = StyleSheet.create ({
     color: 'gray',
   },
   shareIcon: {
-    flex: 1,
-    color: 'gray',
-    position: 'absolute',
-    left: width - 230,
+    //flex: 1,
+    //color: 'gray',
+    //position: 'absolute',
+    //left: width - 230,
   },
   iconText: {
     marginLeft: 6,

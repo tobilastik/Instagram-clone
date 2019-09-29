@@ -16,6 +16,7 @@ import Notifications from './src/screens/Notifications';
 import Portal from './src/screens/JobPortal';
 import Forum from './src/screens/Forum';
 import Search from './src/screens/SearchScreen';
+import Upload from './src/screens/Upload';
 import Messages from './src/screens/MessageScreen';
 import ClapButton from './src/components/ClapButton';
 import {
@@ -23,8 +24,13 @@ import {
   Ionicons,
   Entypo,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from '@expo/vector-icons';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import SideMenu from './src/components/SideMenu';
+import Settings from './src/screens/Settings';
+import Profile from './src/screens/Profile';
+import ChangePassword from './src/screens/ChangePassword';
 
 export default class App extends Component {
   render () {
@@ -80,16 +86,16 @@ const AppTabNavigator = createBottomTabNavigator (
         ),
       },
     },
-    Search: {
-      screen: Search,
-      navigationOptions: {
-        tabBarLabel: 'Search',
-        activeTintColor: '#00852d',
-        tabBarIcon: ({tintColor}) => (
-          <Ionicons name="ios-search" color={tintColor} size={20} />
-        ),
-      },
-    },
+    // Search: {
+    //   screen: Search,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Search',
+    //     activeTintColor: '#00852d',
+    //     tabBarIcon: ({tintColor}) => (
+    //       <Ionicons name="ios-search" color={tintColor} size={20} />
+    //     ),
+    //   },
+    // },
     'Job Portal': {
       screen: Portal,
       navigationOptions: {
@@ -97,6 +103,16 @@ const AppTabNavigator = createBottomTabNavigator (
         activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
           <FontAwesome name="support" color={tintColor} size={20} />
+        ),
+      },
+    },
+    Upload: {
+      screen: Upload,
+      navigationOptions: {
+        tabBarLabel: 'Upload',
+        activeTintColor: '#00852d',
+        tabBarIcon: ({tintColor}) => (
+          <MaterialIcons name="add-a-photo" color={tintColor} size={20} />
         ),
       },
     },
@@ -135,6 +151,9 @@ const AppStackNavigator = createStackNavigator (
   {
     AppTabNavigator: AppTabNavigator,
     ClapButton: ClapButton,
+    Settings: Settings,
+    Profile: Profile,
+    ChangePassword: ChangePassword,
   },
   {
     defaultNavigationOptions: ({navigation}) => {
@@ -151,11 +170,18 @@ const AppStackNavigator = createStackNavigator (
     },
   }
 );
-const AppDrawerNavigator = createDrawerNavigator ({
-  Settings: {
-    screen: AppStackNavigator,
+const AppDrawerNavigator = createDrawerNavigator (
+  {
+    Setting: {
+      screen: AppStackNavigator,
+    },
   },
-});
+  {
+    contentComponent: props => (
+      <SideMenu currentScreen={props.navigation.state.routeName} {...props} />
+    ),
+  }
+);
 const AppSwitchNavigator = createSwitchNavigator ({
   Welcome: {screen: Welcome},
   Login: {screen: Login},
