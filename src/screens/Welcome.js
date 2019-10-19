@@ -58,7 +58,7 @@ export default class SwiperComponent extends Component {
           }
         >
 
-          <View style={styles.slide1}>
+          {/* <View style={styles.slide1}>
             <ImageBackground
               source={require ('../assets/images/welcome1.jpg')}
               style={{height: '100%', width: '100%'}}
@@ -104,7 +104,7 @@ export default class SwiperComponent extends Component {
               </View>
             </ImageBackground>
 
-          </View>
+                </View> */}
           <View style={styles.slide2}>
             <ImageBackground
               source={require ('../assets/images/welcome2.jpg')}
@@ -154,7 +154,7 @@ export default class SwiperComponent extends Component {
 
             </ImageBackground>
           </View>
-          <View style={styles.slide3}>
+          {/* <View style={styles.slide3}>
             <ImageBackground
               source={require ('../assets/images/welcome3.jpg')}
               style={{height: '100%', width: '100%'}}
@@ -206,7 +206,7 @@ export default class SwiperComponent extends Component {
 
             </ImageBackground>
           </View>
-          <View style={styles.slide4}>
+          {/* <View style={styles.slide4}> 
             <ImageBackground
               source={require ('../assets/images/welcome4.jpg')}
               style={{height: '100%', width: '100%'}}
@@ -257,8 +257,8 @@ export default class SwiperComponent extends Component {
               </View>
 
             </ImageBackground>
-          </View>
-          <View style={styles.slide4}>
+          </View> */}
+          {/* <View style={styles.slide4}>
             <ImageBackground
               source={require ('../assets/images/welcome5.jpg')}
               style={{height: '100%', width: '100%'}}
@@ -309,7 +309,7 @@ export default class SwiperComponent extends Component {
               </View>
 
             </ImageBackground>
-          </View>
+          </View> */}
 
         </Swiper>
         <View style={{position: 'absolute', alignSelf: 'center', bottom: 8}}>

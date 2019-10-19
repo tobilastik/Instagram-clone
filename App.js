@@ -31,10 +31,16 @@ import SideMenu from './src/components/SideMenu';
 import Settings from './src/screens/Settings';
 import Profile from './src/screens/Profile';
 import ChangePassword from './src/screens/ChangePassword';
+import {Provider} from 'react-redux';
+import store from './src/store/store';
 
 export default class App extends Component {
   render () {
-    return <AppContainer />;
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
 

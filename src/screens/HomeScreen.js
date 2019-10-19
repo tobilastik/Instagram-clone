@@ -1,31 +1,17 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-  Dimensions,
-  FlatList,
-} from 'react-native';
+import {View, ScrollView, StyleSheet, Dimensions, FlatList} from 'react-native';
 import color from '../constants/Colors';
-import {
-  Ionicons,
-  FontAwesome,
-  Entypo,
-  Foundation,
-  AntDesign,
-} from '@expo/vector-icons';
-import ClapButton from '../components/ClapButton';
 import home from '../api/home.json';
 import HomeDetails from '../components/HomeDetails';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {addComment, removeComment} from '../store/actions/comments.actions';
+import {increment} from '../store/actions/likes.action';
 
 const height = Dimensions.get ('window').height;
 const width = Dimensions.get ('window').width;
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor (props) {
     super (props);
     this.state = {};
@@ -46,6 +32,18 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    likes: state.likes,
+    comments: state.comments,
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators ({addComment, removeComment, increment}, dispatch);
+}
+export default connect (mapStateToProps, mapDispatchToProps) (HomeScreen);
 
 const styles = StyleSheet.create ({
   container: {

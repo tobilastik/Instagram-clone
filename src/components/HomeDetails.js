@@ -20,9 +20,10 @@ import {
   Feather,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-import Constants from 'expo-constants';
-import * as Sharing from 'expo-sharing';
-import {FileSystem} from 'expo';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {addComment, removeComment} from '../store/actions/comments.actions';
+import {increment} from '../store/actions/likes.action';
 import ClapButton from '../components/ClapButton';
 
 const height = Dimensions.get ('window').height;
@@ -30,7 +31,7 @@ const width = Dimensions.get ('window').width;
 
 //const image_source = require('../assets/images/yoga.jpg')
 
-export default class HomeDetails extends Component {
+class HomeDetails extends Component {
   constructor (props) {
     super (props);
     this.state = {
@@ -41,6 +42,7 @@ export default class HomeDetails extends Component {
     this.setState ({bookmarkIcon: !this.state.bookmarkIcon});
   };
   render () {
+    const {increment, addComment, removeComment,post, i} = this.props;
     let home = this.props.home;
     return (
       <View style={{paddingBottom: 30, paddingTop: 10}}>
@@ -84,10 +86,11 @@ export default class HomeDetails extends Component {
           >
             <TouchableOpacity
               style={{flexDirection: 'row', alignItems: 'center'}}
+              onPress={this.props.increment.bind (null, i)}
             >
 
               <Foundation name="heart" size={25} style={styles.iconStyle} />
-              <Text style={styles.iconText}>{home.snippet.likes}</Text>
+              <Text style={styles.iconText}>{this.props.likes}</Text>
 
             </TouchableOpacity>
             <TouchableOpacity
@@ -176,6 +179,18 @@ nFormatter = (num, digits) => {
   }
   return (num / si[i].value).toFixed (digits).replace (rx, '$1') + si[i].symbol;
 };
+
+function mapStateToProps (state) {
+  return {
+    likes: state.likes,
+    comments: state.comments,
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators ({addComment, removeComment, increment}, dispatch);
+}
+export default connect (mapStateToProps, mapDispatchToProps) (HomeDetails);
 
 const styles = StyleSheet.create ({
   container: {
