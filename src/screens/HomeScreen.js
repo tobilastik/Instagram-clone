@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, Dimensions, FlatList} from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  FlatList,
+  Text,
+} from 'react-native';
 import color from '../constants/Colors';
 import home from '../api/home.json';
 import HomeDetails from '../components/HomeDetails';
@@ -7,6 +15,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {addComment, removeComment} from '../store/actions/comments.actions';
 import {increment} from '../store/actions/likes.action';
+import {Feather, MaterialIcons} from '@expo/vector-icons';
+import Story from '../components/Story';
 
 const height = Dimensions.get ('window').height;
 const width = Dimensions.get ('window').width;
@@ -19,16 +29,57 @@ class HomeScreen extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <FlatList
-          data={home.items}
-          renderItem={home => <HomeDetails home={home.item} />}
-          keyExtractor={home => home.id}
-          ItemSeparatorComponent={() => (
-            <View style={{height: 0.5, backgroundColor: '#E5E5E5'}} />
-          )}
-        />
-      </ScrollView>
+      <View>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 10,
+            borderBottomColor: 'gray',
+            borderBottomWidth: 0.5,
+            marginVertical: 12,
+          }}
+        >
+          <TouchableOpacity>
+            <Feather name="camera" size={28} color="black" />
+          </TouchableOpacity>
+          <View
+            style={{
+              paddingLeft: width / 4.5,
+            }}
+          >
+            <Text style={{fontSize: 32, fontWeight: '600'}}>
+              Instagram
+            </Text>
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              flexDirection: 'row',
+              paddingVertical: 10,
+              right: 0,
+            }}
+          >
+            <TouchableOpacity style={{marginRight: 20}}>
+              <MaterialIcons name="live-tv" size={28} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity style={{marginRight: 14}}>
+              <Feather name="send" size={28} color="black" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <ScrollView style={styles.container}>
+          <Story />
+
+          <FlatList
+            data={home.items}
+            renderItem={home => <HomeDetails home={home.item} />}
+            keyExtractor={home => home.id}
+            ItemSeparatorComponent={() => (
+              <View style={{height: 0.5, backgroundColor: '#E5E5E5'}} />
+            )}
+          />
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -47,9 +98,7 @@ export default connect (mapStateToProps, mapDispatchToProps) (HomeScreen);
 
 const styles = StyleSheet.create ({
   container: {
-    flex: 1,
-    //margin: 14,
-    marginVertical: 12,
+    //flex: 1,
   },
   profilePicture: {
     height: 30,

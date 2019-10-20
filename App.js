@@ -19,13 +19,7 @@ import Search from './src/screens/SearchScreen';
 import Upload from './src/screens/Upload';
 import Messages from './src/screens/MessageScreen';
 import ClapButton from './src/components/ClapButton';
-import {
-  FontAwesome,
-  Ionicons,
-  Entypo,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import {FontAwesome, Ionicons, Foundation} from '@expo/vector-icons';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import SideMenu from './src/components/SideMenu';
 import Settings from './src/screens/Settings';
@@ -85,62 +79,51 @@ const AppTabNavigator = createBottomTabNavigator (
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarLabel: 'Home',
-        activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
-          <Ionicons name="ios-home" color={tintColor} size={20} />
+          <Foundation name="home" color={tintColor} size={28} />
         ),
       },
     },
-    // Search: {
-    //   screen: Search,
-    //   navigationOptions: {
-    //     tabBarLabel: 'Search',
-    //     activeTintColor: '#00852d',
-    //     tabBarIcon: ({tintColor}) => (
-    //       <Ionicons name="ios-search" color={tintColor} size={20} />
-    //     ),
-    //   },
-    // },
-    'Job Portal': {
-      screen: Portal,
+    Search: {
+      screen: Search,
       navigationOptions: {
-        tabBarLabel: 'Job Portal',
-        activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
-          <FontAwesome name="support" color={tintColor} size={20} />
+          <Ionicons name="ios-search" color={tintColor} size={28} />
         ),
       },
     },
+
     Upload: {
       screen: Upload,
       navigationOptions: {
         tabBarLabel: 'Upload',
-        activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
-          <MaterialIcons name="add-a-photo" color={tintColor} size={20} />
+          <FontAwesome name="plus-square-o" color={tintColor} size={28} />
         ),
       },
     },
     Inbox: {
       screen: Messagetab,
       navigationOptions: {
-        tabBarLabel: 'Inbox',
-        activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
-          <Entypo name="message" color={tintColor} size={20} />
+          <Ionicons name="ios-heart-empty" color={tintColor} size={28} />
         ),
       },
     },
-    Forum: {
-      screen: Forum,
+    Profile: {
+      screen: Profile,
       navigationOptions: {
-        tabBarLabel: 'Forum',
-        activeTintColor: '#00852d',
         tabBarIcon: ({tintColor}) => (
-          <MaterialCommunityIcons name="forum" color={tintColor} size={20} />
+          <FontAwesome name="user-o" color={tintColor} size={28} />
         ),
       },
+    },
+  },
+  {
+    tabBarOptions: {
+      showLabel: false,
+      activeTintColor: 'black',
+      inactiveTintColor: 'gray',
     },
   },
   {
@@ -160,6 +143,12 @@ const AppStackNavigator = createStackNavigator (
     Settings: Settings,
     Profile: Profile,
     ChangePassword: ChangePassword,
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    },
   },
   {
     defaultNavigationOptions: ({navigation}) => {

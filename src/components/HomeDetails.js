@@ -19,13 +19,8 @@ import {
   AntDesign,
   Feather,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from '@expo/vector-icons';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {addComment, removeComment} from '../store/actions/comments.actions';
-import {increment} from '../store/actions/likes.action';
-import ClapButton from '../components/ClapButton';
-
 const height = Dimensions.get ('window').height;
 const width = Dimensions.get ('window').width;
 
@@ -42,10 +37,11 @@ class HomeDetails extends Component {
     this.setState ({bookmarkIcon: !this.state.bookmarkIcon});
   };
   render () {
-    const {increment, addComment, removeComment,post, i} = this.props;
+    const {increment, addComment, removeComment, post, i} = this.props;
     let home = this.props.home;
     return (
       <View style={{paddingBottom: 30, paddingTop: 10}}>
+
         <View>
           <View
             style={{
@@ -60,10 +56,9 @@ class HomeDetails extends Component {
             <Text style={styles.textStyle}>{home.snippet.name}</Text>
             <TouchableHighlight
               underlayColor="transparent"
-              onPress={() => this.props.navigation.navigate ('ClapButton')}
-              style={{position: 'absolute', right: 5}}
+              style={{position: 'absolute', right: 15}}
             >
-              <Text style={{color: 'gray'}}>{home.snippet.time}</Text>
+              <Ionicons name="ios-more" size={20} color="black" />
             </TouchableHighlight>
           </View>
 
@@ -73,9 +68,7 @@ class HomeDetails extends Component {
               style={styles.uploadPicture}
             />
           </TouchableHighlight>
-          <View>
-            <ClapButton />
-          </View>
+
           <View
             style={{
               flexDirection: 'row',
@@ -86,11 +79,13 @@ class HomeDetails extends Component {
           >
             <TouchableOpacity
               style={{flexDirection: 'row', alignItems: 'center'}}
-              onPress={this.props.increment.bind (null, i)}
             >
 
-              <Foundation name="heart" size={25} style={styles.iconStyle} />
-              <Text style={styles.iconText}>{this.props.likes}</Text>
+              <Ionicons
+                name="ios-heart-empty"
+                size={30}
+                style={styles.iconStyle}
+              />
 
             </TouchableOpacity>
             <TouchableOpacity
@@ -103,12 +98,9 @@ class HomeDetails extends Component {
 
               <FontAwesome
                 name="comment-o"
-                size={22}
+                size={28}
                 style={styles.iconStyle}
               />
-              <Text style={styles.iconText}>
-                {nFormatter (home.snippet.comments)}
-              </Text>
 
             </TouchableOpacity>
 
@@ -120,40 +112,29 @@ class HomeDetails extends Component {
               }}
             >
 
-              <Ionicons name="ios-eye" size={25} style={styles.iconStyle} />
-              <Text style={styles.iconText}>
-                {nFormatter (home.snippet.views)}
-              </Text>
+              <Feather name="send" size={25} style={styles.iconStyle} />
 
             </TouchableOpacity>
 
             <TouchableHighlight
               underlayColor="transparent"
+              style={{position: 'absolute', right: 6}}
               onPress={() => this.bookmarkImage ()}
             >
               {this.state.bookmarkIcon
-                ? <MaterialCommunityIcons
-                    name="bookmark-outline"
+                ? <FontAwesome
+                    name="bookmark-o"
                     size={30}
                     style={styles.shareIcon}
                   />
-                : <MaterialCommunityIcons
+                : <FontAwesome
                     name="bookmark"
                     size={30}
-                    //style={styles.shareIcon}
+                    style={styles.shareIcon}
                   />}
             </TouchableHighlight>
           </View>
 
-          <TouchableHighlight onPress={() => alert ('to comments page')}>
-            <View style={{flex: 1, flexDirection: 'row', marginLeft: 10}}>
-
-              <AntDesign name="github" size={20} color="gray" />
-              <Text style={{color: 'gray', marginLeft: 10}}>
-                View all comments...
-              </Text>
-            </View>
-          </TouchableHighlight>
         </View>
       </View>
     );
@@ -180,17 +161,7 @@ nFormatter = (num, digits) => {
   return (num / si[i].value).toFixed (digits).replace (rx, '$1') + si[i].symbol;
 };
 
-function mapStateToProps (state) {
-  return {
-    likes: state.likes,
-    comments: state.comments,
-  };
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({addComment, removeComment, increment}, dispatch);
-}
-export default connect (mapStateToProps, mapDispatchToProps) (HomeDetails);
+export default HomeDetails;
 
 const styles = StyleSheet.create ({
   container: {
@@ -215,16 +186,16 @@ const styles = StyleSheet.create ({
   textStyle: {
     fontSize: 18,
     fontWeight: '400',
-    color: 'gray',
+    color: 'black',
   },
   iconStyle: {
-    color: 'gray',
+    color: 'black',
   },
   shareIcon: {
-    //flex: 1,
-    //color: 'gray',
-    //position: 'absolute',
-    //left: width - 230,
+    flex: 1,
+    color: 'black',
+    position: 'absolute',
+    right: 4,
   },
   iconText: {
     marginLeft: 6,
