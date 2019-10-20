@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 
 import {
@@ -19,7 +20,7 @@ import {
 } from 'native-base';
 import {MaterialIcons, Octicons} from 'react-native-vector-icons';
 import CardComponent from '../components/CardComponent';
-import {Feather, Ionicons} from '@expo/vector-icons';
+import {Feather, Ionicons, FontAwesome} from '@expo/vector-icons';
 import color from '../constants/Colors';
 
 var {height, width} = Dimensions.get ('window');
@@ -33,6 +34,13 @@ var images = [
   require ('../assets/images/chess.jpg'),
   require ('../assets/images/photoshop.jpg'),
   require ('../assets/images/fitness.jpg'),
+];
+
+var images2 = [
+  require ('../assets/images/photoshop.jpg'),
+  require ('../assets/images/architecture.jpg'),
+  require ('../assets/images/ui-ux.png'),
+  require ('../assets/images/photography.jpeg'),
 ];
 
 class ProfileTab extends Component {
@@ -90,6 +98,33 @@ class ProfileTab extends Component {
     });
   }
 
+  renderSectionTwo () {
+    return images2.map ((image2, index) => {
+      return (
+        <View
+          key={index}
+          style={[
+            {width: width / 3},
+            {height: width / 3},
+            {marginBottom: 2},
+            index % 3 !== 0 ? {paddingLeft: 2} : {paddingLeft: 0},
+          ]}
+        >
+          <Image
+            style={{
+              flex: 1,
+              alignSelf: 'stretch',
+              width: undefined,
+              height: undefined,
+            }}
+            source={image2}
+          />
+
+        </View>
+      );
+    });
+  }
+
   renderSection () {
     if (this.state.activeIndex == 0) {
       return (
@@ -100,11 +135,9 @@ class ProfileTab extends Component {
       );
     } else if (this.state.activeIndex == 1) {
       return (
-        <View>
-          <CardComponent imageSource="1" likes="101" claps="200" />
-          <CardComponent imageSource="2" likes="101" claps="200" />
-          <CardComponent imageSource="3" likes="101" claps="200" />
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
 
+          {this.renderSectionTwo ()}
         </View>
       );
     }
@@ -154,7 +187,7 @@ class ProfileTab extends Component {
                   <Ionicons
                     name="ios-add-circle"
                     color={color.blue}
-                    size={20}
+                    size={24}
                   />
                 </View>
               </TouchableOpacity>
@@ -169,17 +202,17 @@ class ProfileTab extends Component {
                     alignItems: 'flex-end',
                   }}
                 >
-                  <View style={{alignItems: 'center'}}>
-                    <Text>20</Text>
-                    <Text style={{fontSize: 10, color: 'grey'}}>Posts</Text>
+                  <View style={{alignItems: 'center', marginTop: 22}}>
+                    <Text style={{fontSize: 22}}>22</Text>
+                    <Text style={{fontSize: 16, color: 'grey'}}>Posts</Text>
                   </View>
                   <View style={{alignItems: 'center'}}>
-                    <Text>205</Text>
-                    <Text style={{fontSize: 10, color: 'grey'}}>Followers</Text>
+                    <Text style={{fontSize: 22}}>225</Text>
+                    <Text style={{fontSize: 16, color: 'grey'}}>Followers</Text>
                   </View>
                   <View style={{alignItems: 'center'}}>
-                    <Text>167</Text>
-                    <Text style={{fontSize: 10, color: 'grey'}}>Following</Text>
+                    <Text style={{fontSize: 22}}>227</Text>
+                    <Text style={{fontSize: 16, color: 'grey'}}>Following</Text>
                   </View>
                 </View>
 
@@ -205,20 +238,23 @@ class ProfileTab extends Component {
               <View style={{flexDirection: 'row'}}>
 
                 {/** Edit profile takes up 3/4th **/}
-                <Button
-                  bordered
-                  gray
+                <TouchableHighlight
                   style={{
                     flex: 3,
                     marginLeft: 10,
                     justifyContent: 'center',
                     height: 30,
+                    borderColor: 'lightgray',
+                    borderWidth: 0.4,
+                    backgroundColor: 'white',
+                    alignItems: 'center',
+                    marginHorizontal: 12,
                   }}
                 >
-                  <Text>Edit Profile</Text>
-                </Button>
-
-                {/** Settings takes up  1/4th place **/}
+                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                    Edit Profile
+                  </Text>
+                </TouchableHighlight>
 
               </View>
             </View>{/**End edit profile**/}
@@ -239,8 +275,8 @@ class ProfileTab extends Component {
                 transparent
                 active={this.state.activeIndex == 0}
               >
-                <MaterialIcons
-                  name="photo-library"
+                <FontAwesome
+                  name="table"
                   style={[
                     {fontSize: 26},
                     this.state.activeIndex == 0 ? {} : {color: 'grey'},
@@ -252,8 +288,8 @@ class ProfileTab extends Component {
                 transparent
                 active={this.state.activeIndex == 1}
               >
-                <Octicons
-                  name="file-directory"
+                <MaterialIcons
+                  name="person-pin"
                   style={[
                     {fontSize: 26},
                     this.state.activeIndex == 1 ? {} : {color: 'grey'},
@@ -262,11 +298,7 @@ class ProfileTab extends Component {
               </Button>
 
             </View>
-
-            {/** Height =width/3 so that image sizes vary according to size of the phone yet remain squares **/}
-
             {this.renderSection ()}
-
           </View>
         </Content>
       </Container>
@@ -278,27 +310,6 @@ export default ProfileTab;
 const styles = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6f7f9',
   },
 });
-
-{
-  /**  // <FlatList
-            //     horizontal={false}
-            //     numColumns={3}
-            //     data={[{ key: 'a' }, { key: 'b' }, { key: 'c' }, { key: 'd' }, { key: 'e' }, { key: 'f' }, { key: 'g' }, { key: 'h' }, { key: 'i' }, { key: 'j' }, { key: 'k' }, { key: 'l' }, { key: 'm' }, { key: 'n' }, { key: 'o' }]}
-            //     renderItem={({ item, index }) =>
-            //         <View style={[{ width: (width) / 3 }, { height: (width) / 3 }, { marginBottom: 2 }, index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 }]}>
-            //             <Image style={{
-            //                 flex: 1,
-            //                 alignSelf: 'stretch',
-            //                 width: undefined,
-            //                 height: undefined,
-            //             }}
-            //                 source={images[index]}>
-            //             </Image>
-            //         </View>
-            //     }//end render item
-            // />
- **/
-}

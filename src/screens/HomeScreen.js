@@ -62,7 +62,10 @@ class HomeScreen extends Component {
             <TouchableOpacity style={{marginRight: 20}}>
               <MaterialIcons name="live-tv" size={28} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity style={{marginRight: 14}}>
+            <TouchableOpacity
+              style={{marginRight: 14}}
+              onPress={() => this.props.navigation.navigate ('Messages')}
+            >
               <Feather name="send" size={28} color="black" />
             </TouchableOpacity>
           </View>

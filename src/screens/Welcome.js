@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import color from '../constants/Colors';
-import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
+import {Ionicons, MaterialCommunityIcons, AntDesign} from '@expo/vector-icons';
 
 const width = Dimensions.get ('window').width;
 const height = Dimensions.get ('window').height;
@@ -133,10 +133,10 @@ export default class SwiperComponent extends Component {
                     top: 50,
                   }}
                 >
-                  <Ionicons name="md-cash" size={60} color={color.navyblue} />
+                  <AntDesign name="instagram" size={60} color={color.red} />
                 </View>
 
-                <Text style={styles.text}>UI/UX</Text>
+                <Text style={styles.text}>INSTAGRAM CLONE</Text>
 
                 <Text
                   style={{
@@ -147,8 +147,7 @@ export default class SwiperComponent extends Component {
                     fontSize: 18,
                   }}
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                  Built with Expo React Native
                 </Text>
               </View>
 

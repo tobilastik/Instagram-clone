@@ -28,7 +28,7 @@ export default class App extends Component {
         <StatusBar barStyle="default" />
 
         <Text style={styles.exampleText}>
-          Piccyhub: Upload Image to the Server
+          Upload Image{' '}
         </Text>
 
         <Button
