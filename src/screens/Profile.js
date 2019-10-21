@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   TouchableHighlight,
+  StatusBar,
+  Platform,
 } from 'react-native';
 
 import {
@@ -150,7 +152,14 @@ class ProfileTab extends Component {
   render () {
     return (
       <Container style={styles.container}>
-        <Header style={{paddingLeft: 10, paddingLeft: 10}}>
+        <Header
+          style={{
+            paddingLeft: 10,
+            paddingLeft: 10,
+            backgroundColor: 'white',
+            paddingTop: 15,
+          }}
+        >
           <Left>
             <Icon name="md-person-add" />
           </Left>

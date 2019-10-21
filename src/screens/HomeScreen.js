@@ -11,15 +11,13 @@ import {
 import color from '../constants/Colors';
 import home from '../api/home.json';
 import HomeDetails from '../components/HomeDetails';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {addComment, removeComment} from '../store/actions/comments.actions';
-import {increment} from '../store/actions/likes.action';
 import {Feather, MaterialIcons} from '@expo/vector-icons';
 import Story from '../components/Story';
 
 const height = Dimensions.get ('window').height;
 const width = Dimensions.get ('window').width;
+
+console.disableYellowBox = true;
 
 class HomeScreen extends Component {
   constructor (props) {
@@ -36,7 +34,7 @@ class HomeScreen extends Component {
             padding: 10,
             borderBottomColor: 'gray',
             borderBottomWidth: 0.5,
-            marginVertical: 12,
+            marginVertical: 14,
           }}
         >
           <TouchableOpacity>
@@ -87,17 +85,7 @@ class HomeScreen extends Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    likes: state.likes,
-    comments: state.comments,
-  };
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({addComment, removeComment, increment}, dispatch);
-}
-export default connect (mapStateToProps, mapDispatchToProps) (HomeScreen);
+export default HomeScreen;
 
 const styles = StyleSheet.create ({
   container: {
